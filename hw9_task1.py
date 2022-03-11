@@ -9,12 +9,7 @@
 # из-за чего некоторые интернет-провайдеры заблокировали к нему доступ,
 # он может быть недоступен. В таком случае решайте это задание на REPL.it — оттуда всё должно быть доступно.
 # This API call provides all powerstats for the given character. The powerstats are as follows :-
-# Intelligence
-# Strength
-# Speed
-# Durability
-# Power
-# Combat
+# Intelligence: Strength, Speed, Durability, Power, Combat
 
 import requests
 from pprint import pprint
@@ -38,8 +33,6 @@ if __name__ == '__main__':
     power = 'intelligence'
     results = search_power_get(search_hero, power)
     pprint(results)
-
-
     max_power = {'id': 0, 'name': 'none', power: 0}
     for hero in results:
         if max_power[power] < hero[power]:
