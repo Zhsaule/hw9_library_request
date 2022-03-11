@@ -60,7 +60,7 @@ class YaUploader:
 if __name__ == '__main__':
     # Получить путь к загружаемому файлу и токен от пользователя
     path_to_file = "download"  # Путь относительно каталога
-    token = "AQAAAAA7UKe9AADLW15xHcF38UkykACXUxw1Fc0"
+    token = ...
 
     uploader = YaUploader(token)
     uploader.create_folder(path_to_file)
