@@ -8,7 +8,13 @@
 # -> ⚠️ Недавно сервис SuperHero API переехал на заблокированный Роскомнадзором IP-адрес,
 # из-за чего некоторые интернет-провайдеры заблокировали к нему доступ,
 # он может быть недоступен. В таком случае решайте это задание на REPL.it — оттуда всё должно быть доступно.
-
+# This API call provides all powerstats for the given character. The powerstats are as follows :-
+# Intelligence
+# Strength
+# Speed
+# Durability
+# Power
+# Combat
 
 import requests
 from pprint import pprint
@@ -16,25 +22,26 @@ from pprint import pprint
 BASE_URL = "https://superheroapi.com/api/2619421814940190/"
 
 
-def search_intelligence_get(search_name):
-    list_intelligence = list()
+def search_power_get(search_name, search_power='intelligence'):
+    list_power = list()
     for i in search_name:
         url = BASE_URL + "search/" + i
         response_character = requests.get(url, timeout=5).json()["results"][0]
-        list_intelligence.append({'id': response_character["id"],
-                                  'name': response_character["name"],
-                                  'intelligence': int(response_character["powerstats"]["intelligence"])})
-    return list_intelligence
+        list_power.append({'id': response_character["id"],
+                           'name': response_character["name"],
+                           'intelligence': int(response_character["powerstats"][search_power])})
+    return list_power
 
 
 if __name__ == '__main__':
     search_hero = ['Hulk', 'Captain America', 'Thanos']
-    results = search_intelligence_get(search_hero)
+    power = 'intelligence'
+    results = search_power_get(search_hero, power)
     pprint(results)
 
-    max_intelligence = {'id': 0, 'name': 'none', 'intelligence': 0}
-    for hero in results:
-        if max_intelligence['intelligence'] < hero['intelligence']:
-            max_intelligence = hero
 
-    print(f'Герой {max_intelligence["name"]} с максимальным уровнем intelligence = {max_intelligence["intelligence"]}')
+    max_power = {'id': 0, 'name': 'none', power: 0}
+    for hero in results:
+        if max_power[power] < hero[power]:
+            max_power = hero
+    print(f'\nГерой {max_power["name"]} с максимальным уровнем {power} = {max_power[power]}.')
